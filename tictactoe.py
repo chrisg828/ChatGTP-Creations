@@ -10,24 +10,34 @@ class TicTacToe:
         self.frame = tk.Frame(self.root)
         self.frame.grid(row=0, column=0)
 
+        self.start_game()
+
+    def start_game(self):
         # Create the buttons for the game board
         self.buttons = []
         for i in range(3):
             button_row = []
             for j in range(3):
                 button = tk.Button(self.frame, text=" ", width=10, height=5,
-                                   command=lambda r=i, c=j: self.button_clicked(r, c))
+                                command=lambda r=i, c=j: self.button_clicked(r, c))
                 button.grid(row=i, column=j)
                 button_row.append(button)
             self.buttons.append(button_row)
+
+        print(self.buttons)
 
         # Create a label to display the current player's turn
         self.turn_label = tk.Label(self.root, text="Player X's turn")
         self.turn_label.grid(row=1, column=0)
 
         # Create a label to display the winner (if any)
-        self.winner_label = tk.Label(self.root, text=" ")
+        self.winner_label = tk.Label(self.root, text="                              ")
         self.winner_label.grid(row=2, column=0)
+
+        # Create a button to start a new game
+        self.new_game_button = tk.Button(self.frame, text="New Game",
+                                        command=lambda : self.start_game())
+        self.new_game_button.grid(row=4, column=1, sticky="ew")
 
         # Initialize the game state
         self.player = "X"
@@ -85,5 +95,5 @@ def main():
     ttt = TicTacToe()
     ttt.play_game()
 
-main()
-
+if __name__ == "__main__":
+   main()
